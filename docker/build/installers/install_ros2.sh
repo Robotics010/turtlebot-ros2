@@ -42,3 +42,8 @@ apt_get_update_and_install python3-flake8-docstrings \
     python3-pytest-repeat \
     python3-pytest-rerunfailures
 
+# Install ROS 2 packages
+sudo apt update
+sudo apt upgrade -y
+
+sudo apt install ros-humble-desktop -y
