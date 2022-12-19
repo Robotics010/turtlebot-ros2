@@ -22,7 +22,15 @@ set -e
 cd "$(dirname "${BASH_SOURCE[0]}")"
 . ./installer_base.sh
 
-# Install development tools and ROS tools
-apt_get_update_and_install ros-humble-navigation2 \
-    ros-humble-nav2-bringup \
-    ros-humble-turtlebot3*
+apt_get_update_and_install libzmq3-dev libboost-coroutine-dev libncurses5-dev libncursesw5-dev
+mkdir -p /tmp/bt_cpp/
+cd /tmp/
+
+git clone https://github.com/BehaviorTree/BehaviorTree.CPP.git --branch 3.8.0 bt_cpp
+cd /tmp/bt_cpp/
+mkdir build; cd build
+cmake ..
+make
+make install
+
+rm -rf /tmp/bt_cpp/

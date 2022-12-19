@@ -27,6 +27,8 @@ sudo add-apt-repository universe
 sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
 
+apt upgrade
+
 # Install development tools and ROS tools
 apt_get_update_and_install python3-flake8-docstrings \
     python3-pip \
@@ -42,8 +44,9 @@ apt_get_update_and_install python3-flake8-docstrings \
     python3-pytest-repeat \
     python3-pytest-rerunfailures
 
-# Install ROS 2 packages
-sudo apt update
-sudo apt upgrade -y
+# Install ROS 2 using binary installation
+apt_get_update_and_install ros-humble-desktop
 
-sudo apt install ros-humble-desktop -y
+# init rosdep
+rosdep init
+rosdep update
